@@ -1,0 +1,18 @@
+# Box names
+names:
+  default: "&7Default box"
+  normal: "&fUncommon box"
+  epic: "&dEpic box"
+  legend: "&6Legend box"
+
+# Messages
+msg:
+  # Drop box messages
+  default: "&7You caught common box!"
+  normal: "&fYou caught uncommon box!"
+  epic: "&dYou caught epic box!"
+  legend: "&6You caught legend box!"
+
+  # Errors
+  using: "&Use /getbox <default | normal | epic | legend>"
+  console: "&fYou can't use this command"

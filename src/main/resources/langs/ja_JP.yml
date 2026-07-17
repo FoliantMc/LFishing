@@ -1,0 +1,18 @@
+# Box names
+names:
+  default: "&7でふぉると ぼっくす"
+  normal: "&fあんこもん ぼっくす"
+  epic: "&dえぴっく ぼっくす"
+  legend: "&6れじぇんど ぼっくす"
+
+# Messages
+msg:
+  # Drop box messages
+  default: "&7こもん ぼっくす を げっと した！"
+  normal: "&fあんこもん ぼっくす を げっと した！"
+  epic: "&dえぴっく ぼっくす を げっと した！"
+  legend: "&6れじぇんど ぼっくす を げっと した！"
+
+  # Errors
+  using: "&げっとぼっくす ＜でふぉると｜あんこもん｜えぴっく｜れじぇんど＞ を つかって ください"
+  console: "&fこの こまんどは つかえません"

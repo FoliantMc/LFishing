@@ -1,4 +1,4 @@
-package com.karpen.lFishing.commands;
+package jp.karpen.lFishing.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

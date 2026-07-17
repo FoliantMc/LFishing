@@ -1,6 +1,6 @@
 name: LFishing
-version: '1.6.1.1'
-main: com.karpen.lFishing.LFishing
+version: '2.0'
+main: jp.karpen.lFishing.LFishing
 api-version: '1.21'
 softdepend: [ Chatty ]
 commands:

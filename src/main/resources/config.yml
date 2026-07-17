@@ -3,17 +3,17 @@
 
 # Supported only & colors and §
 
+# Lang
+# For example: en_US, ru_RU
+lang: en_US
+
 # Chances
 # From 0 to 500
 chances:
   default: 10
   normal: 5
   epic: 3
-  mifik: 1
   legend: 0.1
-
-  # Spawn silverfish
-  silverfish: 8
 
   # Break the fishing rod
   break: 30
@@ -27,21 +27,7 @@ luck:
   default: 12
   normal: 8
   epic: 5
-  mifik: 2
   legend: 0.8
-
-  silverfish: 10
-
-# Broadcast messages
-broadcast:
-  using: true
-
-# Chatty api
-chatty:
-  using: false
-
-  # Chat for chat msg
-  chat: "global"
 
 # Skins
 # Use https://textures.minecraft.net/texture/ only!
@@ -49,47 +35,4 @@ skin:
   default: "https://textures.minecraft.net/texture/2cf5b1cfed1c27dd4c3bef6b9844994739851e46b3fc7fda1cbc25b80ab3b"
   normal: "https://textures.minecraft.net/texture/f7145c0ee1cd493664fb1b26622db0492a1969a659931e7a3362d9071fbd4cf8"
   epic: "https://textures.minecraft.net/texture/a1b96fc7d915b57f683493106704353d8837772dff51b20bf3bda09f2fa8b3ba"
-  mifik: "https://textures.minecraft.net/texture/2ff4242b1a17cf9ce781a1e33415bb19341f996ec1388ec126ee824af9e72a8d"
   legend: "https://textures.minecraft.net/texture/cdf81449131dcdd3578899fcd9592e13f5cca57ae7481fd6710bb6ca85d65c9"
-
-# Messages
-msg:
-
-  # Drop box messages
-  default: "&7Вы поймали стандартную коробку!"
-  normal: "&fВы поймали необычную коробку!"
-
-  # If chat api and broadcast disabled message
-  epic: "&dВы выловили эпическую коробку!"
-  mifik: "&5Вы выловили мифическую коробку!"
-  legend: "&6Вы выловили легендарную коробку!"
-
-  # Top massages
-  top: "&7Топ игроков по количеству открытых коробок: "
-  topIsEmpty: "&7Топ пуст >_<"
-
-  # Errors
-  # /getbox cmd
-  using: "&fИспользуй /getbox <default | normal | epic | mifik | legend>"
-  console: "&fЭту команду может использовать только игрок"
-
-# Chat msg
-# %name% supported only in chat group
-chat:
-
-  # Drop box messages
-  epic: "&d%name% выловил эпическую коробку!"
-  mifik: "&5%name% выловил мифическую коробку!"
-  legend: "&6%name% выловил легендарную коробку!"
-
-reload:
-  args: "&cИспользуйте /lfishing reload"
-  done: "&cПлагин перезагружен"
-
-# Box names
-names:
-  default: "&7Стандартная коробка"
-  normal: "&fНеобычная коробка"
-  epic: "&dЭпическая коробка"
-  mifik: "&5Мифическая коробка"
-  legend: "&6Легендарная коробка"
