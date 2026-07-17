@@ -2,18 +2,9 @@ name: LFishing
 version: '2.0'
 main: jp.karpen.lFishing.LFishing
 api-version: '1.21'
-softdepend: [ Chatty ]
 commands:
-  lfishing:
-    usage: /lfishing reload
-    description: Перезагружает плагин
-    permission: karpen.lfishing
-    permission-message: You don't have permission
   getbox:
     usage: /getbox <default | normal | epic>
-    description: Выдает коробку
+    description: Give box
     permission: karpen.lfishing.getbox
     permission-message: You don't have permission
-  topbox:
-    usage: /topbox
-    description: Показывает топ игроков
