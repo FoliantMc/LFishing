@@ -50,10 +50,14 @@ public class FishingListener implements Listener {
 
         Player player = event.getPlayer();
 
-        if (ThreadLocalRandom.current().nextDouble(0, 500) < config.getDouble("chances.break")) {
+        if (ThreadLocalRandom.current().nextDouble(100) < config.getDouble("chances.break")) {
             if (player.getInventory().getItemInMainHand().getType() != Material.FISHING_ROD) return;
             player.getInventory().getItemInMainHand().setAmount(0);
             player.playSound(player.getLocation(), Sound.AMBIENT_WARPED_FOREST_MOOD, 10.0f, 1.0f);
+            return;
+        }
+
+        if (ThreadLocalRandom.current().nextDouble(100) > config.getDouble("chances.drop")) {
             return;
         }
 
@@ -62,7 +66,10 @@ public class FishingListener implements Listener {
         double epicChance = getChance(BoxType.EPIC, player);
         double legendChance = getChance(BoxType.LEGEND, player);
         double totalChance = defaultChance + normalChance + epicChance + legendChance;
-        double random = Math.random() * totalChance;
+        
+        if (totalChance <= 0) return;
+        
+        double random = ThreadLocalRandom.current().nextDouble(totalChance);
 
         double cumulative = 0;
         cumulative += legendChance;
@@ -129,7 +136,8 @@ public class FishingListener implements Listener {
     }
 
     private double getChance(BoxType type, Player player) {
-        return config.getDouble(String.format(isLuckRod(player) ? "luck.%s" : "chances.%s", type.toString().toLowerCase()));
+        boolean useLuck = config.getBoolean("luck.enabled") && isLuckRod(player);
+        return config.getDouble(String.format(useLuck ? "luck.%s" : "chances.%s", type.toString().toLowerCase()));
     }
 
     private static boolean isLuckRod(Player player) {

@@ -1,0 +1,18 @@
+# Box names
+names:
+  default: "&7Обычная коробка"
+  normal: "&fНеобычная коробка"
+  epic: "&dЭпическая коробка"
+  legend: "&6Легендарная коробка"
+
+# Messages
+msg:
+  # Drop box messages
+  default: "&7Вы поймали обычную коробку!"
+  normal: "&fВы поймали необычную коробку!"
+  epic: "&dВы поймали эпическую коробку!"
+  legend: "&6Вы поймали легендарную коробку!"
+
+  # Errors
+  using: "&Use /getbox <default | normal | epic | legend>"
+  console: "&fYou can't use this command"

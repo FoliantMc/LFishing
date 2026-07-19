@@ -5,29 +5,32 @@
 
 # Lang
 # For example: en_US, ru_RU
-lang: en_US
+lang: ru_RU
 
 # Chances
-# From 0 to 500
+# От 0.0 до 100.0 (в процентах)
 chances:
-  default: 10
-  normal: 5
-  epic: 3
-  legend: 0.1
+  # Общий шанс того, что бокс вообще выпадет
+  drop: 15.0
 
-  # Break the fishing rod
-  break: 30
+  default: 70.0
+  normal: 20.0
+  epic: 9.0
+  legend: 1.0
+
+  # Шанс поломки удочки
+  break: 5.0
 
 # Luck chances
 luck:
 
-  # Enable this function
+  # Включить использование шансов из этой секции при наличии зачарования "Везучий рыбак"
   enabled: true
 
-  default: 12
-  normal: 8
-  epic: 5
-  legend: 0.8
+  default: 50.0
+  normal: 30.0
+  epic: 15.0
+  legend: 5.0
 
 # Skins
 # Use https://textures.minecraft.net/texture/ only!
