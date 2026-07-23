@@ -20,7 +20,7 @@ public final class LFishing extends JavaPlugin {
     private static LFishing instance;
 
     @Getter
-    private LangManager langManager;
+    private static LangManager langManager;
 
     @Override
     public void onEnable() {
@@ -28,7 +28,7 @@ public final class LFishing extends JavaPlugin {
 
         saveDefaultConfig();
 
-        this.langManager = new LangManager(this);
+        langManager = new LangManager(this);
 
         SkinManager skinManager = new SkinManager();
         FishingListener fishingListener = new FishingListener(this, skinManager);

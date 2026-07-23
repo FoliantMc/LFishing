@@ -4,30 +4,31 @@
 # Supported only & colors and §
 
 # Lang
-# For example: en_US, ru_RU
-lang: en_US
+# For example: ja_JP, en_US
+lang: ja_JP
 
 # Chances
-# From 0 to 500
+# От 0.0 до 100.0 (в процентах)
 chances:
-  default: 10
-  normal: 5
-  epic: 3
-  legend: 0.1
+  # Default chance
+  drop: 5.0
 
-  # Break the fishing rod
-  break: 30
+  default: 70.0
+  normal: 20.0
+  epic: 9.0
+  legend: 1.0
 
-# Luck chances
+  # Rod break chance
+  break: 5.0
+
+# Luck rod chances
 luck:
-
-  # Enable this function
   enabled: true
 
-  default: 12
-  normal: 8
-  epic: 5
-  legend: 0.8
+  default: 50.0
+  normal: 30.0
+  epic: 15.0
+  legend: 5.0
 
 # Skins
 # Use https://textures.minecraft.net/texture/ only!

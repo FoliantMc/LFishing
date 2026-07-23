@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class AbstractBox implements Listener {
     protected final LFishing plugin;
@@ -69,7 +70,7 @@ public abstract class AbstractBox implements Listener {
         for (ItemStack item : items) {
             int slot;
             do {
-                slot = new Random().nextInt(0, 27);
+                slot = ThreadLocalRandom.current().nextInt(0, 27);
             } while (inventory.getItem(slot) != null);
 
             inventory.setItem(slot, item);
@@ -82,7 +83,7 @@ public abstract class AbstractBox implements Listener {
 
         player.playSound(player.getLocation(), Sound.UI_LOOM_TAKE_RESULT, 1.0f, 1.0f);
 
-        Random random = new Random();
+        Random random = ThreadLocalRandom.current();;
         int spawnChance = random.nextInt(0, 10);
 
         if (spawnChance < 1) {

@@ -7,6 +7,10 @@ names:
 
 # Messages
 msg:
+  # Caught
+  caught: "つかまった"
+  un-caught: "失った"
+
   # Drop box messages
   default: "&7こもん ぼっくす を げっと した！"
   normal: "&fあんこもん ぼっくす を げっと した！"

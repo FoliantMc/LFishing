@@ -6,6 +6,7 @@ import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class EpicBox extends AbstractBox {
     public EpicBox(LFishing plugin) {
@@ -14,12 +15,11 @@ public final class EpicBox extends AbstractBox {
 
     protected List<ItemStack> generateRandomItems() {
         List<ItemStack> items = new ArrayList<>();
-        Random random = new Random();
+        Random random = ThreadLocalRandom.current();
         int var = random.nextInt(0, 5);
 
         switch (var) {
             case 0:
-                items.add(new ItemStack(Material.DIAMOND_HORSE_ARMOR, 1));
                 items.add(new ItemStack(Material.GOLD_NUGGET, random.nextInt(1, 9)));
                 items.add(new ItemStack(Material.IRON_NUGGET, random.nextInt(1, 8)));
                 items.add(new ItemStack(Material.GOLDEN_APPLE, random.nextInt(1, 2)));
@@ -29,7 +29,7 @@ public final class EpicBox extends AbstractBox {
                 items.add(new ItemStack(Material.COBWEB, random.nextInt(1, 3)));
                 break;
             case 1:
-                items.add(new ItemStack(Material.BLAZE_ROD, random.nextInt(1, 2)));
+                items.add(new ItemStack(Material.BLAZE_ROD, random.nextInt(2)));
                 items.add(new ItemStack(Material.EMERALD, random.nextInt(1, 3)));
                 items.add(new ItemStack(Material.LAPIS_LAZULI, random.nextInt(1, 4)));
                 items.add(new ItemStack(Material.IRON_BLOCK, random.nextInt(1, 2)));
@@ -50,8 +50,8 @@ public final class EpicBox extends AbstractBox {
                 break;
             case 3:
                 items.add(new ItemStack(Material.GOLD_BLOCK, random.nextInt(1, 2)));
-                items.add(new ItemStack(Material.DIAMOND, random.nextInt(1, 2)));
-                items.add(new ItemStack(Material.BLAZE_ROD, random.nextInt(1, 4)));
+                items.add(new ItemStack(Material.EMERALD_ORE, random.nextInt(1, 2)));
+                items.add(new ItemStack(Material.BLAZE_ROD, random.nextInt(2)));
                 items.add(new ItemStack(Material.GOLD_NUGGET, random.nextInt(1, 10)));
                 items.add(new ItemStack(Material.COBWEB, random.nextInt(1, 3)));
                 items.add(new ItemStack(Material.COBWEB, random.nextInt(1, 3)));

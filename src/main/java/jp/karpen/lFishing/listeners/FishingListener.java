@@ -9,11 +9,14 @@ import jp.karpen.lFishing.boxes.NormalBox;
 import jp.karpen.lFishing.models.BoxType;
 import jp.karpen.lFishing.utils.LangManager;
 import jp.karpen.lFishing.utils.SkinManager;
+import jp.karpen.lFishing.minigame.FishingMinigame;
 import org.bukkit.*;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerFishEvent;
@@ -32,68 +35,97 @@ public class FishingListener implements Listener {
     private final NormalBox normalBox;
     private final EpicBox epicBox;
     private final LegendBox legendBox;
+    private final FishingMinigame minigame;
 
     public FishingListener(LFishing plugin, SkinManager skinManager) {
         this.config = plugin.getConfig();
-        this.lang = plugin.getLangManager();
+        this.lang = LFishing.getLangManager();
         this.skinManager = skinManager;
 
         this.defaultBox = new DefaultBox(plugin);
         this.normalBox = new NormalBox(plugin);
         this.epicBox = new EpicBox(plugin);
         this.legendBox = new LegendBox(plugin);
+        this.minigame = new FishingMinigame(plugin, skinManager);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerFishing(PlayerFishEvent event) {
         if (event.getState() != PlayerFishEvent.State.CAUGHT_FISH) return;
+        if (event.getCaught() == null) return;
 
         Player player = event.getPlayer();
 
-        if (ThreadLocalRandom.current().nextDouble(0, 500) < config.getDouble("chances.break")) {
-            if (player.getInventory().getItemInMainHand().getType() != Material.FISHING_ROD) return;
-            player.getInventory().getItemInMainHand().setAmount(0);
-            player.playSound(player.getLocation(), Sound.AMBIENT_WARPED_FOREST_MOOD, 10.0f, 1.0f);
-            return;
+        event.getHook().setWaitTime(10, 10);
+
+        final org.bukkit.entity.Entity caught = event.getCaught();
+
+        ItemStack caughtItem = null;
+        if (caught instanceof Item) {
+            caughtItem = ((Item) caught).getItemStack().clone();
         }
 
+        caught.remove();
+
+        final ItemStack finalCaughtItem = caughtItem;
+
+        minigame.start(player, () -> {
+            if (ThreadLocalRandom.current().nextDouble(100) < config.getDouble("chances.break")) {
+                if (player.getInventory().getItemInMainHand().getType() == Material.FISHING_ROD) {
+                    player.getInventory().getItemInMainHand().setAmount(0);
+                    player.playSound(player.getLocation(), Sound.AMBIENT_WARPED_FOREST_MOOD, 10.0f, 1.0f);
+                }
+                return;
+            }
+
+            if (ThreadLocalRandom.current().nextDouble(100) <= config.getDouble("chances.drop")) {
+                handleBoxDrop(player);
+            } else {
+                if (finalCaughtItem != null) {
+                    player.getInventory().addItem(finalCaughtItem).values().forEach(item -> 
+                        player.getWorld().dropItemNaturally(player.getLocation(), item));
+                }
+            }
+        }, () -> {});
+    }
+
+    private void handleBoxDrop(Player player) {
         double defaultChance = getChance(BoxType.DEFAULT, player);
         double normalChance = getChance(BoxType.NORMAL, player);
         double epicChance = getChance(BoxType.EPIC, player);
         double legendChance = getChance(BoxType.LEGEND, player);
         double totalChance = defaultChance + normalChance + epicChance + legendChance;
-        double random = Math.random() * totalChance;
 
+        if (totalChance <= 0) return;
+
+        double random = ThreadLocalRandom.current().nextDouble(totalChance);
         double cumulative = 0;
+
         cumulative += legendChance;
         if (random < cumulative) {
             legendBox.dropBox(player, skinManager);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', 
-                    lang.getMessage("msg.legend")));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("msg.legend")));
             return;
         }
 
         cumulative += epicChance;
         if (random < cumulative) {
             epicBox.dropBox(player, skinManager);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', 
-                    lang.getMessage("msg.epic")));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("msg.epic")));
             return;
         }
 
         cumulative += normalChance;
         if (random < cumulative) {
             normalBox.dropBox(player, skinManager);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', 
-                    lang.getMessage("msg.normal")));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("msg.normal")));
             return;
         }
 
         cumulative += defaultChance;
         if (random < cumulative) {
             defaultBox.dropBox(player, skinManager);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', 
-                    lang.getMessage("msg.default")));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("msg.default")));
         }
     }
 
@@ -129,7 +161,8 @@ public class FishingListener implements Listener {
     }
 
     private double getChance(BoxType type, Player player) {
-        return config.getDouble(String.format(isLuckRod(player) ? "luck.%s" : "chances.%s", type.toString().toLowerCase()));
+        boolean useLuck = config.getBoolean("luck.enabled") && isLuckRod(player);
+        return config.getDouble(String.format(useLuck ? "luck.%s" : "chances.%s", type.toString().toLowerCase()));
     }
 
     private static boolean isLuckRod(Player player) {
