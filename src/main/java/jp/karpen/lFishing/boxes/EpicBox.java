@@ -6,6 +6,7 @@ import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class EpicBox extends AbstractBox {
     public EpicBox(LFishing plugin) {
@@ -14,7 +15,7 @@ public final class EpicBox extends AbstractBox {
 
     protected List<ItemStack> generateRandomItems() {
         List<ItemStack> items = new ArrayList<>();
-        Random random = new Random();
+        Random random = ThreadLocalRandom.current();
         int var = random.nextInt(0, 5);
 
         switch (var) {

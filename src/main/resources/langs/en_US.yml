@@ -7,6 +7,10 @@ names:
 
 # Messages
 msg:
+  # Caught
+  caught: "You caught it"
+  un-caught: "You lose it"
+
   # Drop box messages
   default: "&7You caught common box!"
   normal: "&fYou caught uncommon box!"

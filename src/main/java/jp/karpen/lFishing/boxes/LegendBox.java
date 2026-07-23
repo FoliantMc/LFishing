@@ -5,6 +5,7 @@ import jp.karpen.lFishing.models.BoxType;
 import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class LegendBox extends AbstractBox {
     public LegendBox(LFishing plugin) {
@@ -13,7 +14,7 @@ public final class LegendBox extends AbstractBox {
 
     protected List<ItemStack> generateRandomItems() {
         List<ItemStack> items = new ArrayList<>();
-        Random random = new Random();
+        Random random = ThreadLocalRandom.current();;
         int var = random.nextInt(0, 5);
 
         switch (var) {

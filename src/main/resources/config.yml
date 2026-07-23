@@ -4,13 +4,13 @@
 # Supported only & colors and §
 
 # Lang
-# For example: en_US, ru_RU
-lang: ru_RU
+# For example: ja_JP, en_US
+lang: ja_JP
 
 # Chances
 # От 0.0 до 100.0 (в процентах)
 chances:
-  # Общий шанс того, что бокс вообще выпадет
+  # Default chance
   drop: 5.0
 
   default: 70.0
@@ -18,13 +18,11 @@ chances:
   epic: 9.0
   legend: 1.0
 
-  # Шанс поломки удочки
+  # Rod break chance
   break: 5.0
 
-# Luck chances
+# Luck rod chances
 luck:
-
-  # Включить использование шансов из этой секции при наличии зачарования "Везучий рыбак"
   enabled: true
 
   default: 50.0
